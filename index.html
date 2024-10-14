@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-image: url(backgrnd.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .top-bar {
+            background-color: #1a3b5d;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-info span {
+            margin-right: 20px;
+        }
+
+        .social-icons a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #ff7f50;
+        }
+
+        header {
+            background-color: rgba(26, 59, 93, 0.9);
+            padding: 20px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo img {
+            height: 80px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .cta-button {
+            background-color: #ff7f50;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #e8410f;
+            transform: scale(1.05);
+        }
+
+        nav ul li a:hover {
+            color: #ff7f50;
+        }
+
+        .hero {
+            background-size: cover;
+            background-position: center;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            color: #fff;
+            max-width: 50%;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-left: 30px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            margin-left: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 50px;
+            bottom: 0;
+            max-height: 400px;
+            z-index: 1;
+        }
+
+        footer {
+            background-color: #1a3b5d;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 40px;
+            border: 1px solid #888;
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .modal-content h4{
+            color: #ff7f50;
+            text-align: center;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #ff7f50;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #1a3b5d;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #ff7f50;
+            outline: none;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff7f50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .form-group button:hover {
+            background-color: #e8410f;
+            transform: translateY(-2px);
+        }
+
+        .toggle-form {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .toggle-form a {
+            color: #1a3b5d;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .toggle-form a:hover {
+            color: #ff7f50;
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="LOGO.png" alt="Shipping TNC Logo">
+                    LOGISTICSHUB
+                </div>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aboutus.html">About us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact us</a></li>
+                </ul>
+                <a href="#" class="cta-button" id="requestQuoteBtn">REQUEST A QUOTE</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Efficient Shipping Solutions for Your Business</h1>
+                <p>We provide top-notch logistics services to help your business thrive.</p>
+                <a href="services.html" class="cta-button">Our Services</a>
+            </div>
+            <img src="hi.png" alt="Shipping worker" class="hero-image">
+        </div>
+    </section>
+
+    <footer>
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <div class="contact-info">
+                        <span><i class="fas fa-phone-alt"></i> +91 9876543210</span>
+                        <span><i class="far fa-envelope"></i> logistics@yourdomain.com</span>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <hr>
+        <br>
+        <div class="container">
+            <span>&copy; 2024 LogisticsHub. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h4>Welcome To LogisticsHub</h4>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+            <div class="toggle-form">
+                <a href="#" id="toggleSignup">Don't have an account? Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var modal = document.getElementById("loginModal");
+        var btn = document.getElementById("requestQuoteBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        document.getElementById("toggleSignup").addEventListener("click", function(e) {
+            e.preventDefault();
+            var form = document.getElementById("loginForm");
+            var toggle = document.getElementById("toggleSignup");
+            
+            if (form.id === "loginForm") {
+                form.id = "signupForm";
+                form.innerHTML = `
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Sign Up</button>
+                    </div>
+                `;
+                toggle.textContent = "Already have an account? Log in";
+            } else {
+                form.id = "loginForm";
+                form.innerHTML = `
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Login</button>
+                    </div>
+                `;
+                toggle.textContent = "Don't have an account? Sign up";
+            }
+        });
+
+        document.querySelector(".modal-content form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            
+            if (this.id === "signupForm") {
+                var name = document.getElementById("name").value;
+                localStorage.setItem("user", JSON.stringify({name: name, email: email, password: password}));
+                alert("Account created successfully! Please log in.");
+                location.reload();
+            } else {
+                var user = JSON.parse(localStorage.getItem("user"));
+                if (user && user.email === email && user.password === password) {
+                    window.location.href = "request.html";
+                } else {
+                    alert("Invalid email or password. Please try again.");
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request A Quote - LOGISTICSHUB</title>
+    <style>
+        :root {
+            --primary-color: #1a3a5a;
+            --secondary-color: #ff7f50;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #1a3b5d;
+            padding: 20px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo img {
+            height: 80px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .banner {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('banner.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .banner h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            background-color: white;
+            padding: 40px;
+            margin-top: -50px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .image-section {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .form-section {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        .order-list {
+            margin-top: 30px;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .order-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-details {
+            display: grid;
+            gap: 10px;
+        }
+
+        .order-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .order-meta div {
+            background-color: var(--light-gray);
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        .route-info {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+
+        .cost-info {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .remove-button {
+            background-color: #ff4136;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            height: fit-content;
+            transition: background-color 0.3s ease;
+        }
+
+        .remove-button:hover {
+            background-color: #dc352c;
+        }
+
+        .total-estimate {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .estimate-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+        }
+
+        button[type="submit"] {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        #getQuoteButton {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #getQuoteButton:hover {
+            background-color: #2c5282;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        #getQuoteButton:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Keep all existing responsive styles */
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .order-item {
+                grid-template-columns: 1fr;
+            }
+
+            .remove-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="LOGO.png" alt="LogisticsHub Logo">
+                    LOGISTICSHUB
+                </div>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aboutus.html">About us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="banner">
+        <div class="container">
+            <h1>Request A Quote</h1>
+            <p>Get a personalized shipping quote for your logistics needs</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <div class="image-section">
+                <img src="truck.jpg" alt="Truck">
+                <img src="ship.jpg" alt="Ship">
+                <img src="train.jpg" alt="Train">
+                <img src="plane.jpg" alt="Plane">
+            </div>
+
+            <div class="form-section">
+                <h2>Your Information</h2>
+                <form id="quoteForm">
+                    <div class="form-row">
+                        <input type="text" id="name" placeholder="Your name" required>
+                        <input type="text" id="company" placeholder="Company Name">
+                    </div>
+                    <div class="form-row">
+                        <input type="email" id="email" placeholder="Email Address" required>
+                        <input type="tel" id="phone" placeholder="Phone Number" required>
+                    </div>
+
+                    <h2>Shipment Details</h2>
+                    <div class="form-row">
+                        <input type="text" id="origin" placeholder="Pickup Location (City, State)" required>
+                        <input type="text" id="destination" placeholder="Delivery Location (City, State)" required>
+                    </div>
+                    <div class="form-row">
+                        <select id="goodsType" required>
+                            <option value="">Select Type of Goods</option>
+                            <option value="general">General Cargo</option>
+                            <option value="fragile">Fragile</option>
+                            <option value="perishable">Perishable</option>
+                            <option value="hazardous">Hazardous</option>
+                        </select>
+                        <select id="goodsSize" required>
+                            <option value="">Select Size of Goods</option>
+                            <option value="small">Small (0-20kg)</option>
+                            <option value="medium">Medium (21-100kg)</option>
+                            <option value="large">Large (101-500kg)</option>
+                            <option value="extra-large">Extra Large (500kg+)</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <input type="number" id="weight" placeholder="Weight (in kg)" required>
+                        <select id="deliverySpeed" required>
+                            <option value="">Select Delivery Speed</option>
+                            <option value="normal">Normal Delivery</option>
+                            <option value="express">Express Delivery</option>
+                        </select>
+                    </div>
+                    <button type="submit">Add to Order</button>
+                </form>
+
+                <div class="order-list">
+                    <h3>Current Orders</h3>
+                    <div id="orderList"></div>
+                    <div class="total-estimate">
+                        <p>Total Estimated Cost: <span id="totalCost">₹0</span></p>
+                        <button id="getQuoteButton">Get Final Quote</button>
+                    </div>
+                </div>
+
+                <div class="estimate-section" id="estimateSection" style="display: none;">
+                    <h3>Estimated Quote</h3>
+                    <div class="estimate-details" id="estimateDetails"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+// Global variables to store orders and total cost
+let orders = [];
+let totalCost = 0;
+
+// Initialize event listeners when document is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('quoteForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        addOrder();
+    });
+
+    document.getElementById('getQuoteButton').addEventListener('click', function() {
+        displayFinalQuote();
+    });
+});
+
+// Function to add a new order
+function addOrder() {
+    const order = {
+        origin: document.getElementById('origin').value,
+        destination: document.getElementById('destination').value,
+        weight: parseFloat(document.getElementById('weight').value),
+        goodsType: document.getElementById('goodsType').value,
+        goodsSize: document.getElementById('goodsSize').value,
+        deliverySpeed: document.getElementById('deliverySpeed').value,
+        name: document.getElementById('name').value,
+        company: document.getElementById('company').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value
+    };
+
+    const cost = calculateCost(order);
+    order.cost = cost;
+    orders.push(order);
+    totalCost += cost;
+
+    updateOrderList();
+    updateTotalCost();
+    resetForm();
+}
+
+// Function to calculate shipping cost
+function calculateCost(order) {
+    const distances = {
+        'Delhi-Mumbai': 1400,
+        'Mumbai-Delhi': 1400,
+        'Bangalore-Chennai': 350,
+        'Chennai-Bangalore': 350,
+        'Kolkata-Hyderabad': 1500,
+        'Hyderabad-Kolkata': 1500,
+        'Ahmedabad-Pune': 660,
+        'Pune-Ahmedabad': 660,
+        'Jaipur-Lucknow': 570,
+        'Lucknow-Jaipur': 570
+    };
+
+    function hashString(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash |= 0;
+        }
+        return Math.abs(hash);
+    }
+
+    // Get city names without state info
+    const originCity = order.origin.split(',')[0].trim().toLowerCase();
+    const destCity = order.destination.split(',')[0].trim().toLowerCase();
+    const distanceKey = `${originCity}-${destCity}`;
+    
+    // Get distance from predefined distances or calculate using hash
+    let distance = distances[distanceKey];
+    if (!distance) {
+        const hash = hashString(originCity + destCity);
+        distance = (hash % 1700) + 300; // Generate distance between 300-2000 km
+    }
+
+    // Base cost calculation
+    let cost = order.weight * 15; // Base rate per kg
+    cost += distance * 5; // Distance cost
+
+    // Apply multipliers based on goods type
+    const typeMultipliers = {
+        'fragile': 1.5,
+        'hazardous': 1.5,
+        'perishable': 1.3,
+        'general': 1.0
+    };
+    cost *= typeMultipliers[order.goodsType] || 1.0;
+
+    // Apply multipliers based on size
+    const sizeMultipliers = {
+        'small': 1.0,
+        'medium': 1.2,
+        'large': 1.5,
+        'extra-large': 2.0
+    };
+    cost *= sizeMultipliers[order.goodsSize] || 1.0;
+
+    // Apply express delivery multiplier
+    if (order.deliverySpeed === 'express') {
+        cost *= 1.5;
+    }
+
+    // Round to nearest hundred
+    return Math.ceil(cost / 100) * 100;
+}
+
+// Function to update the order list display
+function updateOrderList() {
+    const orderList = document.getElementById('orderList');
+    orderList.innerHTML = '';
+    
+    orders.forEach((order, index) => {
+        const orderItem = document.createElement('div');
+        orderItem.className = 'order-item';
+        
+        orderItem.innerHTML = `
+            <div class="order-details">
+                <div class="route-info">
+                    ${order.origin} → ${order.destination}
+                </div>
+                <div class="order-meta">
+                    <div>Weight: ${order.weight}kg</div>
+                    <div>Type: ${order.goodsType}</div>
+                    <div>Size: ${order.goodsSize}</div>
+                    <div>Speed: ${order.deliverySpeed}</div>
+                </div>
+                <div class="cost-info">
+                    Cost: ₹${order.cost.toLocaleString('en-IN')}
+                </div>
+                <div class="customer-info">
+                    <small>Contact: ${order.name} | ${order.phone}</small>
+                </div>
+            </div>
+            <button class="remove-button" onclick="removeOrder(${index})">
+                Remove
+            </button>
+        `;
+        
+        orderList.appendChild(orderItem);
+    });
+}
+
+// Function to update total cost display
+function updateTotalCost() {
+    document.getElementById('totalCost').textContent = `₹${totalCost.toLocaleString('en-IN')}`;
+}
+
+// Function to reset the form after adding an order
+function resetForm() {
+    document.getElementById('quoteForm').reset();
+}
+
+// Function to remove an order
+function removeOrder(index) {
+    totalCost -= orders[index].cost;
+    orders.splice(index, 1);
+    updateOrderList();
+    updateTotalCost();
+}
+
+// Function to display the final quote
+function displayFinalQuote() {
+    const estimateSection = document.getElementById('estimateSection');
+    const estimateDetails = document.getElementById('estimateDetails');
+    
+    if (orders.length === 0) {
+        alert('Please add at least one order before getting a quote.');
+        return;
+    }
+
+    estimateDetails.innerHTML = '';
+    
+    // Add order details
+    orders.forEach((order, index) => {
+        const orderDetail = document.createElement('div');
+        orderDetail.className = 'quote-order-detail';
+        orderDetail.innerHTML = `
+            <h4>Order ${index + 1}</h4>
+            <div class="quote-grid">
+                <div class="quote-info">
+                    <strong>Route:</strong> ${order.origin} to ${order.destination}<br>
+                    <strong>Customer:</strong> ${order.name} (${order.company})<br>
+                    <strong>Contact:</strong> ${order.phone} | ${order.email}
+                </div>
+                <div class="quote-specs">
+                    <strong>Weight:</strong> ${order.weight}kg<br>
+                    <strong>Type:</strong> ${order.goodsType}<br>
+                    <strong>Size:</strong> ${order.goodsSize}<br>
+                    <strong>Speed:</strong> ${order.deliverySpeed}
+                </div>
+                <div class="quote-cost">
+                    <strong>Cost:</strong> ₹${order.cost.toLocaleString('en-IN')}
+                </div>
+            </div>
+            <hr>
+        `;
+        estimateDetails.appendChild(orderDetail);
+    });
+
+    // Add total summary
+    const totalDetail = document.createElement('div');
+    totalDetail.className = 'quote-total';
+    totalDetail.innerHTML = `
+        <h4>Quote Summary</h4>
+        <p>Number of Orders: ${orders.length}</p>
+        <p>Total Estimated Cost: ₹${totalCost.toLocaleString('en-IN')}</p>
+        <small>* This quote is valid for 7 days from the date of generation.</small>
+        <small>* Final cost may vary based on actual weight and distance.</small>
+    `;
+    estimateDetails.appendChild(totalDetail);
+
+    // Show the estimate section
+    estimateSection.style.display = 'block';
+    
+    // Scroll to estimate section
+    estimateSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Function to validate form inputs
+function validateForm() {
+    const requiredFields = ['origin', 'destination', 'weight', 'goodsType', 'goodsSize', 'deliverySpeed'];
+    let isValid = true;
+
+    requiredFields.forEach(field => {
+        const input = document.getElementById(field);
+        if (!input.value) {
+            input.classList.add('invalid');
+            isValid = false;
+        } else {
+            input.classList.remove('invalid');
+        }
+    });
+
+    return isValid;
+}
+
+// Export functions for testing if needed
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        calculateCost,
+        validateForm
+    };
+}
+</script>
+</body>
+</html>
