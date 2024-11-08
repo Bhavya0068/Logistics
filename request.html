@@ -257,6 +257,67 @@
             transform: translateY(0);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+        button {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e86a3e;
+        }
+        .order-list, .estimate-section, .api-section {
+            margin-top: 30px;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .order-item, .api-order-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-details, .api-order-details {
+            margin-bottom: 10px;
+        }
+
+        .cost-info {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .total-estimate {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+        }
+
+        .api-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        #apiResponseContainer {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
 
         /* Keep all existing responsive styles */
         @media (max-width: 768px) {
@@ -267,9 +328,16 @@
             .order-item {
                 grid-template-columns: 1fr;
             }
-
+            .api-buttons {
+                flex-direction: column;
+            }
             .remove-button {
                 width: 100%;
+            }
+            .total-estimate {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
             }
         }
     </style>
@@ -365,6 +433,14 @@
                     <h3>Estimated Quote</h3>
                     <div class="estimate-details" id="estimateDetails"></div>
                 </div>
+                <div class="api-section">
+                    <h2>API Integration</h2>
+                    <div class="api-buttons">
+                        <button onclick="fetchOrders('products')">All Products</button>
+                        <button onclick="fetchOrders('carts')">Shopping Carts</button>
+                        <button onclick="fetchOrders('users')">Users</button>
+                    </div>
+                    <div id="apiResponseContainer"></div>
             </div>
         </div>
     </div>
@@ -590,6 +666,62 @@ function displayFinalQuote() {
     // Scroll to estimate section
     estimateSection.scrollIntoView({ behavior: 'smooth' });
 }
+
+function fetchOrders(endpoint) {
+        const apiUrl = `https://fakestoreapi.com/${endpoint}`;
+        
+        document.getElementById('apiResponseContainer').innerHTML = 'Loading...';
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => displayApiResponse(data, endpoint))
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('apiResponseContainer').innerHTML = 'Error fetching data.';
+            });
+    }
+
+
+function displayApiResponse(data, endpoint) {
+        const container = document.getElementById('apiResponseContainer');
+        container.innerHTML = '';
+
+        if (data.length === 0) {
+            container.innerHTML = 'No data found.';
+            return;
+        }
+
+        data.slice(0, 5).forEach(item => {
+            const itemElement = document.createElement('div');
+            itemElement.className = 'api-order-item';
+
+            switch(endpoint) {
+                case 'products':
+                    itemElement.innerHTML = `
+                        <h4>${item.title}</h4>
+                        <p>Price: $${item.price}</p>
+                        <p>Category: ${item.category}</p>
+                    `;
+                    break;
+                case 'carts':
+                    itemElement.innerHTML = `
+                        <h4>Cart ID: ${item.id}</h4>
+                        <p>User ID: ${item.userId}</p>
+                        <p>Products: ${item.products.length}</p>
+                        `;
+                    break;
+                case 'users':
+                    itemElement.innerHTML = `
+                        <h4>${item.name.firstname} ${item.name.lastname}</h4>
+                        <p>Email: ${item.email}</p>
+                        <p>Phone: ${item.phone}</p>
+                    `;
+                    break;
+            }
+
+            container.appendChild(itemElement);
+        });
+    }
 
 // Function to validate form inputs
 function validateForm() {
